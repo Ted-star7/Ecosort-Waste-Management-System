@@ -5,14 +5,13 @@ Everyone else works on their own branch and opens a Pull Request; Teddy reviews 
 This keeps `main` always working, and keeps the final notebook assembly in one pair of hands.
 
 ## One-time setup (each person)
+After you **accept the repo invitation** from GitHub, you already have access — no token setup needed. Just clone and work; VS Code signs you in when you first push.
 ```bash
 git clone https://github.com/Ted-star7/Ecosort-Waste-Management-System.git
 cd Ecosort-Waste-Management-System
 git config user.name  "Your Name"
 git config user.email "you@example.com"
 ```
-First `git push` asks for a password → use a **Personal Access Token** (GitHub → Settings →
-Developer settings → Personal access tokens, `repo` scope), not your GitHub password.
 
 ## Everyday cycle
 ```bash
