@@ -6,7 +6,7 @@ This keeps `main` always working, and keeps the final notebook assembly in one p
 
 ## One-time setup (each person)
 ```bash
-git clone https://github.com/<owner>/Ecosort-Waste-Management-System.git
+git clone https://github.com/Ted-star7/Ecosort-Waste-Management-System.git
 cd Ecosort-Waste-Management-System
 git config user.name  "Your Name"
 git config user.email "you@example.com"
@@ -14,7 +14,7 @@ git config user.email "you@example.com"
 First `git push` asks for a password → use a **Personal Access Token** (GitHub → Settings →
 Developer settings → Personal access tokens, `repo` scope), not your GitHub password.
 
-## Everyday cycle (Dennis, Jeff, Eglen)
+## Everyday cycle
 ```bash
 git checkout main && git pull origin main       # 1. start from latest main
 git checkout -b dennis-cnn                       # 2. your branch: jeff-text / eglen-rag

@@ -54,7 +54,7 @@ classify_waste_image(image_path)  -> category   # Part 2 helper (Dennis) used by
 
 ## Run in VS Code / local
 ```bash
-git clone <repo-url> && cd Ecosort-Waste-Management-System
+git clone https://github.com/Ted-star7/Ecosort-Waste-Management-System.git && cd Ecosort-Waste-Management-System
 python -m venv .venv && .venv\Scripts\activate     # Windows
 pip install -r requirements.txt
 # put realwaste.zip in data/ ; the first notebook cell unzips it
