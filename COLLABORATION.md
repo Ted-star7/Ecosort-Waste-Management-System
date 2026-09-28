@@ -20,22 +20,17 @@ git checkout -b dennis-cnn                       # 2. your branch: jeff-text / e
 # 3. work ONLY in your own section notebook, e.g. sections/part2_cnn.ipynb
 git add sections/part2_cnn.ipynb
 git commit -m "CNN: MobileNetV2 baseline + confusion matrix"
-git push origin dennis-cnn                        # 4. push YOUR branch (never main)
-```
+git push origin dennis-cnn                        
 
 ## Opening a Pull Request (required to reach main)
 1. After pushing, GitHub shows **"Compare & pull request"** — click it.
 2. Base = `main`, compare = your branch. Describe what you did.
 3. Add **Teddy** as reviewer.
-4. **Teddy** reviews and clicks **Merge pull request → Confirm merge**.
+4. I will review and clicks **Merge pull request → Confirm merge**.
 5. Everyone then runs `git checkout main && git pull origin main`.
 
-> Rule: nobody pushes to `main` directly. All changes reach `main` through a PR that Teddy merges.
+> Rule: nobody pushes to `main` directly. 
 
-## Why section notebooks (important)
-Jupyter notebooks are JSON and are **painful to merge** if two people edit the same one. So each
-person edits **only their own** `sections/partX_*.ipynb`. That way PRs almost never conflict.
-Teddy assembles the finished cells into `waste_management_summative.ipynb` for submission (Part 5).
 
 ## Assembling the final submission (Teddy)
 1. Once each section is approved and merged, open the master `waste_management_summative.ipynb`.
@@ -49,8 +44,4 @@ git checkout main && git pull origin main
 git checkout your-branch && git merge main     # resolve any conflicts here, early and often
 ```
 
-## Do / Don't
-- ✅ Pull `main` before starting; edit only your section notebook; open a PR; clear commit messages.
-- ✅ Use `sorted(folder names)` for categories; keep the grader function names/signatures fixed.
-- ❌ Don't commit `realwaste.zip`, `RealWaste/`, or model files — they're gitignored (share via Releases).
-- ❌ Don't push to `main`; don't edit someone else's section notebook.
+
