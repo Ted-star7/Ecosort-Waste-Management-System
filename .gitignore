@@ -1,0 +1,36 @@
+# ---- Data (large / generated) ----
+data/realwaste.zip
+data/RealWaste/
+data/RealWaste_split/
+*.zip
+
+# ---- Trained models / artifacts ----
+models/*
+!models/.gitkeep
+*.h5
+*.keras
+*.pt
+*.pth
+*.faiss
+*.pkl
+*.joblib
+*.index
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+*.egg-info/
+
+# ---- OS / IDE ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---- Secrets ----
+.env
+*.token
