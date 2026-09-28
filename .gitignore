@@ -1,12 +1,11 @@
 # ---- Data (large / generated) ----
 data/realwaste.zip
 data/RealWaste/
-data/RealWaste_split/
+data/_tmp/
 *.zip
 
-# ---- Trained models / artifacts ----
-models/*
-!models/.gitkeep
+# ---- Trained models / artifacts (share via GitHub Releases, not git) ----
+models/
 *.h5
 *.keras
 *.pt
@@ -16,14 +15,13 @@ models/*
 *.joblib
 *.index
 
-# ---- Python ----
+# ---- Python / notebooks ----
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
 .venv/
 venv/
 env/
-*.egg-info/
 
 # ---- OS / IDE ----
 .DS_Store

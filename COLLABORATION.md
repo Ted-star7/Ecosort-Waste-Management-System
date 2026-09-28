@@ -1,65 +1,57 @@
 # Collaboration Workflow
 
-We have **one `main` branch**. Nobody pushes to `main` directly — all changes go through a
-**Pull Request (PR)** that at least one teammate reviews and merges. This keeps `main` always working.
+One `main` branch. **Teddy is the maintainer and the only person who merges to `main`.**
+Everyone else works on their own branch and opens a Pull Request; Teddy reviews and merges it.
+This keeps `main` always working, and keeps the final notebook assembly in one pair of hands.
 
 ## One-time setup (each person)
 ```bash
-git clone https://github.com/<org-or-teddy>/Ecosort-Waste-Management-System.git
+git clone https://github.com/<owner>/Ecosort-Waste-Management-System.git
 cd Ecosort-Waste-Management-System
 git config user.name  "Your Name"
 git config user.email "you@example.com"
 ```
-On the first `git push`, GitHub asks for a password — use a **Personal Access Token**, not your
-GitHub password (GitHub → Settings → Developer settings → Personal access tokens → Fine-grained
-or classic with `repo` scope). Paste the token as the password.
+First `git push` asks for a password → use a **Personal Access Token** (GitHub → Settings →
+Developer settings → Personal access tokens, `repo` scope), not your GitHub password.
 
-## Everyday cycle
+## Everyday cycle (Dennis, Jeff, Eglen)
 ```bash
-# 1. Always start from the latest main
-git checkout main
-git pull origin main
-
-# 2. Make your own branch for your part
-git checkout -b dennis-cnn        # jeff-text / eglen-rag / teddy-data / teddy-integration
-
-# 3. Work, then stage + commit small logical chunks
-git add src/cnn_model.py notebooks/02_cnn_image_model.ipynb
-git commit -m "CNN: add MobileNetV2 baseline + confusion matrix"
-
-# 4. Push YOUR branch (never straight to main)
-git push origin dennis-cnn
+git checkout main && git pull origin main       # 1. start from latest main
+git checkout -b dennis-cnn                       # 2. your branch: jeff-text / eglen-rag
+# 3. work ONLY in your own section notebook, e.g. sections/part2_cnn.ipynb
+git add sections/part2_cnn.ipynb
+git commit -m "CNN: MobileNetV2 baseline + confusion matrix"
+git push origin dennis-cnn                        # 4. push YOUR branch (never main)
 ```
 
 ## Opening a Pull Request (required to reach main)
-1. After pushing, GitHub shows a **“Compare & pull request”** button — click it.
-2. Base = `main`, compare = your branch. Add a short description of what you did.
-3. Tag a teammate as reviewer.
-4. Once approved, click **Merge pull request** → **Confirm merge**.
-5. Everyone then runs `git checkout main && git pull origin main` to get the update.
+1. After pushing, GitHub shows **"Compare & pull request"** — click it.
+2. Base = `main`, compare = your branch. Describe what you did.
+3. Add **Teddy** as reviewer.
+4. **Teddy** reviews and clicks **Merge pull request → Confirm merge**.
+5. Everyone then runs `git checkout main && git pull origin main`.
 
-> **Rule of thumb:** if you are NOT merging into your own branch, you MUST open a PR.
-> Only merge to `main` through a reviewed PR.
+> Rule: nobody pushes to `main` directly. All changes reach `main` through a PR that Teddy merges.
 
-## Keeping your branch up to date (avoid big conflicts)
+## Why section notebooks (important)
+Jupyter notebooks are JSON and are **painful to merge** if two people edit the same one. So each
+person edits **only their own** `sections/partX_*.ipynb`. That way PRs almost never conflict.
+Teddy assembles the finished cells into `waste_management_summative.ipynb` for submission (Part 5).
+
+## Assembling the final submission (Teddy)
+1. Once each section is approved and merged, open the master `waste_management_summative.ipynb`.
+2. Copy each person's finished cells into the matching `## Part N` placeholder.
+3. Run the notebook **top-to-bottom** so every function/model is defined in order.
+4. Confirm the RUBRIC.md checklist, then submit.
+
+## Keeping your branch current (avoid big conflicts)
 ```bash
 git checkout main && git pull origin main
-git checkout your-branch
-git merge main          # pull main's latest into your branch; resolve conflicts here
-```
-Do this often — small, frequent merges beat one giant painful one at the end.
-
-## Resolving a merge conflict
-Git marks conflicts with `<<<<<<<`, `=======`, `>>>>>>>`. Open the file, keep the correct
-lines, delete the markers, then:
-```bash
-git add <file>
-git commit                # completes the merge
+git checkout your-branch && git merge main     # resolve any conflicts here, early and often
 ```
 
 ## Do / Don't
-- ✅ Pull `main` before starting; work on a branch; open a PR; write clear commit messages.
-- ✅ Keep the function signatures in `src/config.py` and the integration contract fixed.
-- ❌ Don't commit `realwaste.zip`, `RealWaste/`, or trained model files (`.keras`, `.faiss`, …) — they're gitignored. Share those via GitHub Releases.
-- ❌ Don't push directly to `main`.
-- ❌ Don't hard-code the category list — import it from `src/config.py`.
+- ✅ Pull `main` before starting; edit only your section notebook; open a PR; clear commit messages.
+- ✅ Use `sorted(folder names)` for categories; keep the grader function names/signatures fixed.
+- ❌ Don't commit `realwaste.zip`, `RealWaste/`, or model files — they're gitignored (share via Releases).
+- ❌ Don't push to `main`; don't edit someone else's section notebook.

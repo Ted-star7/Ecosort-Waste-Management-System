@@ -1,69 +1,72 @@
 # EcoSort — Waste Management System
 
 An integrated AI assistant for Metro City that (1) identifies waste from **images** (CNN),
-(2) classifies waste from **text descriptions** (text model), and (3) generates
-**recycling instructions** grounded in city policy documents (RAG). The three models
-are combined into one assistant.
+(2) classifies waste from **text descriptions**, and (3) generates **recycling instructions**
+grounded in city policy documents (RAG). The three are combined into one assistant.
 
-## The 9 waste categories
-`Cardboard · Food Organics · Glass · Metal · Miscellaneous Trash · Paper · Plastic · Textile Trash · Vegetation`
-These match **exactly** between the RealWaste image folders and `waste_descriptions.csv`.
-They live in `src/config.py` — never hard-code them anywhere else.
+## How this repo is organized
+The graded deliverable is a **single notebook**: `waste_management_summative.ipynb` (the assembly /
+submission notebook). To avoid four people editing one notebook at once, **each person develops their
+part in its own notebook under `sections/`**, then the finished cells are pasted into the matching
+Part in the master notebook. Everyone imports the libraries they need inside their own notebook —
+there is no shared package to install.
 
-## Team & module ownership
-| Part | Module | Notebook | Owner |
-|------|--------|----------|-------|
-| 1 · Data exploration & prep | `src/data_prep.py` | `notebooks/01_data_exploration.ipynb` | **Teddy** |
-| 2 · CNN image classifier | `src/cnn_model.py` | `notebooks/02_cnn_image_model.ipynb` | **Dennis** |
-| 3 · Text classification | `src/text_classifier.py` | `notebooks/03_text_classification.ipynb` | **Jeff** |
-| 4 · RAG instruction generation | `src/rag_system.py` | `notebooks/04_rag_recycling.ipynb` | **Eglen** |
-| 5 · Integrated assistant | `src/assistant.py` | `notebooks/05_integrated_assistant.ipynb` | **Teddy** |
-
-Parts 2, 3, 4 are **independent** — each touches only its own data (images / CSV / policy JSON)
-and can be built and tested in isolation. Part 1 is shared groundwork; Part 5 depends on all three.
-
-## The integration contract (agree on this — do not change signatures)
 ```
-cnn_model.predict_image(image_path)          -> category (str)      # Dennis
-text_classifier.predict_text(description)    -> category (str)      # Jeff
-rag_system.generate_instructions(category, query) -> (text, docs)   # Eglen
-assistant.assist(image_path=|description=)   -> result dict         # Teddy
-```
-
-## Repo layout
-```
-├── src/            # importable modules (the contract lives here)
-├── notebooks/      # one notebook per part (run in VS Code OR Colab)
-├── data/           # csv + json tracked in git; realwaste.zip & RealWaste/ are gitignored
-├── models/         # trained models (gitignored — share via GitHub Releases)
-├── docs/
+├── waste_management_summative.ipynb   # MASTER — assembled for submission (Teddy maintains)
+├── sections/
+│   ├── part1_data_prep.ipynb   # Teddy
+│   ├── part2_cnn.ipynb          # Dennis
+│   ├── part3_text.ipynb         # Jeff
+│   ├── part4_rag.ipynb          # Eglen
+│   └── part5_integration.ipynb  # Teddy
+├── data/           # waste_descriptions.csv + waste_policy_documents.json (tracked)
+│                   # realwaste.zip & RealWaste/ are gitignored (too big for git)
 ├── requirements.txt
-├── COLLABORATION.md  # git workflow: branches, pull, PR, merge to main
-└── RUBRIC.md         # grading checklist — follow it
+├── COLLABORATION.md   # git workflow + how we assemble the final notebook
+└── RUBRIC.md          # grading checklist — follow it
 ```
 
-## Setup — VS Code / local
+## Team & ownership
+| Part | Owner | Section notebook |
+|------|-------|------------------|
+| 1 · Data exploration & prep | **Teddy** | `sections/part1_data_prep.ipynb` |
+| 2 · CNN image classifier | **Dennis** | `sections/part2_cnn.ipynb` |
+| 3 · Text classification | **Jeff** | `sections/part3_text.ipynb` |
+| 4 · RAG instruction generation | **Eglen** | `sections/part4_rag.ipynb` |
+| 5 · Integration + assembly | **Teddy** | `sections/part5_integration.ipynb` + master |
+
+Parts 2, 3, 4 are **independent** — each touches only its own data. Teddy is the repo maintainer and
+**merges everyone's Pull Requests** into `main`.
+
+## The 9 waste categories (keep consistent everywhere)
+`Cardboard · Food Organics · Glass · Metal · Miscellaneous Trash · Paper · Plastic · Textile Trash · Vegetation`
+They match exactly between the image folders and `waste_descriptions.csv`. Every notebook derives them
+with `sorted(folder names)` so the label order is identical across all parts — don't hard-code a
+different order.
+
+## The function names the grader expects (keep these signatures)
+```
+classify_waste_description(description)      -> category            # Part 3 (Jeff)
+generate_recycling_instructions(category)    -> (text, docs)        # Part 4 (Eglen)
+waste_management_assistant(input_data, input_type="image"|"text")   # Part 5 (Teddy)
+classify_waste_image(image_path)  -> category   # Part 2 helper (Dennis) used by Part 5
+```
+
+## Run in VS Code / local
 ```bash
-git clone <repo-url>
-cd Ecosort-Waste-Management-System
+git clone <repo-url> && cd Ecosort-Waste-Management-System
 python -m venv .venv && .venv\Scripts\activate     # Windows
 pip install -r requirements.txt
-# put realwaste.zip in data/  (see "Dataset" below), then:
-python -m src.data_prep        # sanity check
+# put realwaste.zip in data/ ; the first notebook cell unzips it
 ```
-Open any notebook in VS Code; the first cell handles paths automatically.
 
-## Setup — Google Colab (fast, no Drive)
-Open any notebook in Colab and **run the first cell** — it clones the repo, installs deps,
-and downloads the dataset to Colab's local disk. Set `DATASET_URL` in that cell to the
-`realwaste.zip` **GitHub Release** asset (see below). Enable a GPU for Parts 2 & 4:
-`Runtime → Change runtime type → T4 GPU`.
+## Run in Google Colab (fast, no Drive)
+Open any notebook in Colab and run the first cell — it clones the repo, installs deps, and downloads
+the dataset to Colab's local disk. Set `DATASET_URL` in that cell to the `realwaste.zip` **GitHub
+Release** asset. Enable a GPU for Parts 2 & 4: `Runtime → Change runtime type → T4 GPU`.
 
-## Dataset
-`realwaste.zip` (~688 MB) is **too big for git**. Distribute it as a **GitHub Release asset**
-(Releases allow up to 2 GB): create a release, upload `realwaste.zip`, copy the asset URL into
-the notebook's `DATASET_URL`. Trained models are shared the same way (attach to a release) —
-keep them out of git.
+## Dataset & models
+`realwaste.zip` (~688 MB) and trained models are **too big for git** — distribute them as **GitHub
+Release assets** (up to 2 GB each) and paste the link into the notebooks' `DATASET_URL`.
 
-## Sources
 Dataset: RealWaste (UCI ML Repository / github.com/sam-single/realwaste).
