@@ -8,9 +8,7 @@ grounded in city policy documents (RAG). The three are combined into one assista
 The graded deliverable is a **single notebook**: `waste_management_summative.ipynb` (the assembly /
 submission notebook). To avoid four people editing one notebook at once, **each person develops their
 part in its own notebook under `sections/`**, then the finished cells are pasted into the matching
-Part in the master notebook. Everyone imports the libraries they need inside their own notebook —
-there is no shared package to install.
-
+Part in the master notebook. 
 ```
 ├── waste_management_summative.ipynb   # MASTER — assembled for submission (Teddy maintains)
 ├── sections/
@@ -26,17 +24,7 @@ there is no shared package to install.
 └── RUBRIC.md          # grading checklist — follow it
 ```
 
-## Team & ownership
-| Part | Owner | Section notebook |
-|------|-------|------------------|
-| 1 · Data exploration & prep | **Teddy** | `sections/part1_data_prep.ipynb` |
-| 2 · CNN image classifier | **Dennis** | `sections/part2_cnn.ipynb` |
-| 3 · Text classification | **Jeff** | `sections/part3_text.ipynb` |
-| 4 · RAG instruction generation | **Eglen** | `sections/part4_rag.ipynb` |
-| 5 · Integration + assembly | **Teddy** | `sections/part5_integration.ipynb` + master |
 
-Parts 2, 3, 4 are **independent** — each touches only its own data. Teddy is the repo maintainer and
-**merges everyone's Pull Requests** into `main`.
 
 ## The 9 waste categories (keep consistent everywhere)
 `Cardboard · Food Organics · Glass · Metal · Miscellaneous Trash · Paper · Plastic · Textile Trash · Vegetation`
@@ -60,13 +48,3 @@ pip install -r requirements.txt
 # put realwaste.zip in data/ ; the first notebook cell unzips it
 ```
 
-## Run in Google Colab (fast, no Drive)
-Open any notebook in Colab and run the first cell — it clones the repo, installs deps, and downloads
-the dataset to Colab's local disk. Set `DATASET_URL` in that cell to the `realwaste.zip` **GitHub
-Release** asset. Enable a GPU for Parts 2 & 4: `Runtime → Change runtime type → T4 GPU`.
-
-## Dataset & models
-`realwaste.zip` (~688 MB) and trained models are **too big for git** — distribute them as **GitHub
-Release assets** (up to 2 GB each) and paste the link into the notebooks' `DATASET_URL`.
-
-Dataset: RealWaste (UCI ML Repository / github.com/sam-single/realwaste).
