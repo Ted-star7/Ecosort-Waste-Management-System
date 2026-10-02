@@ -24,16 +24,8 @@ grounded in city policy documents (RAG). The three are combined into one assista
 ## The 9 waste categories 
 `Cardboard · Food Organics · Glass · Metal · Miscellaneous Trash · Paper · Plastic · Textile Trash · Vegetation`
 They match exactly between the image folders and `waste_descriptions.csv`. Every notebook derives them
-with `sorted(folder names)` so the label order is identical across all parts — don't hard-code a
-different order.
+with `sorted(folder names)` so the label order is identical across all parts 
 
-## The function names the grader expects (keep these signatures)
-```
-classify_waste_description(description)      -> category            # Part 3 (Jeff)
-generate_recycling_instructions(category)    -> (text, docs)        # Part 4 (Eglen)
-waste_management_assistant(input_data, input_type="image"|"text")   # Part 5 (Teddy)
-classify_waste_image(image_path)  -> category   # Part 2 helper (Dennis) used by Part 5
-```
 
 ## Run in VS Code / local
 ```bash
