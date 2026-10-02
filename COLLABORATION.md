@@ -5,7 +5,7 @@ Everyone else works on their own branch and opens a Pull Request; Teddy reviews 
 This keeps `main` always working, and keeps the final notebook assembly in one pair of hands.
 
 ## One-time setup (each person)
-After you **accept the repo invitation** from GitHub, you already have access — no token setup needed. Just clone and work; VS Code signs you in when you first push.
+After you **accept the repo invitation** from GitHub, you already have access 
 ```bash
 git clone https://github.com/Ted-star7/Ecosort-Waste-Management-System.git
 cd Ecosort-Waste-Management-System
@@ -41,7 +41,6 @@ git push origin dennis-cnn
 ## Keeping your branch current (avoid big conflicts)
 ```bash
 git checkout main && git pull origin main
-git checkout your-branch && git merge main     # resolve any conflicts here, early and often
-```
+git checkout your-branch && git merge main    
 
 
