@@ -3,7 +3,12 @@
 An integrated AI assistant for Metro City that (1) identifies waste from **images** (CNN),
 (2) classifies waste from **text descriptions**, and (3) generates **recycling instructions**
 grounded in city policy documents (RAG). The three are combined into one assistant.
- 
+
+## How this repo is organized
+The graded deliverable is a **single notebook**: `waste_management_summative.ipynb` (the assembly /
+submission notebook). To avoid four people editing one notebook at once, **each person develops their
+part in its own notebook under `sections/`**, then the finished cells are pasted into the matching
+Part in the master notebook. 
 ```
 ├── waste_management_summative.ipynb   # MASTER — assembled for submission (Teddy maintains)
 ├── sections/
@@ -21,11 +26,19 @@ grounded in city policy documents (RAG). The three are combined into one assista
 
 
 
-## The 9 waste categories 
+## The 9 waste categories (keep consistent everywhere)
 `Cardboard · Food Organics · Glass · Metal · Miscellaneous Trash · Paper · Plastic · Textile Trash · Vegetation`
 They match exactly between the image folders and `waste_descriptions.csv`. Every notebook derives them
-with `sorted(folder names)` so the label order is identical across all parts 
+with `sorted(folder names)` so the label order is identical across all parts — don't hard-code a
+different order.
 
+## The function names the grader expects (keep these signatures)
+```
+classify_waste_description(description)      -> category            # Part 3 (Jeff)
+generate_recycling_instructions(category)    -> (text, docs)        # Part 4 (Eglen)
+waste_management_assistant(input_data, input_type="image"|"text")   # Part 5 (Teddy)
+classify_waste_image(image_path)  -> category   # Part 2 helper (Dennis) used by Part 5
+```
 
 ## Run in VS Code / local
 ```bash

@@ -9,8 +9,7 @@ After you **accept the repo invitation** from GitHub, you already have access
 ```bash
 git clone https://github.com/Ted-star7/Ecosort-Waste-Management-System.git
 cd Ecosort-Waste-Management-System
-git config user.name  "Your Name"
-git config user.email "you@example.com"
+
 ```
 
 ## Everyday cycle
@@ -29,7 +28,7 @@ git push origin dennis-cnn
 4. I will review and clicks **Merge pull request → Confirm merge**.
 5. Everyone then runs `git checkout main && git pull origin main`.
 
-> Rule: nobody pushes to `main` directly. 
+
 
 
 ## Assembling the final submission (Teddy)
@@ -38,7 +37,7 @@ git push origin dennis-cnn
 3. Run the notebook **top-to-bottom** so every function/model is defined in order.
 4. Confirm the RUBRIC.md checklist, then submit.
 
-## Keeping your branch current (avoid big conflicts)
+## Keeping your branch current 
 ```bash
 git checkout main && git pull origin main
 git checkout your-branch && git merge main    
